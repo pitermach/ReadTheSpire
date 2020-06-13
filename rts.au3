@@ -21,7 +21,10 @@ for $i=1 to $WindowList[0] step 1
 $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
 If $text <> $OldText[$i-1] then; speak the new text!
 Speak($WindowList[$i]);announce what window the output came from
-;Now compare the old and newly changed text line by line to only anounce the ones that changed.
+If $WindowList[$i]="Output" then ;The entire output Window should always be reread since that's generally requested by the player
+Tolk_Output($text)
+
+else ;For other windows, compare the old and newly changed text line by line to only anounce the ones that changed.
 $OldArray=StringSplit($OldText[$i-1], @crlf, 1)
 $NewArray=StringSplit($text, @crlf, 1)
 For $i2=1 to $NewArray[0] step 1
@@ -31,6 +34,7 @@ else;The new text has more lines than the old, so just speak all of them
 Speak($NewArray[$i2])
 EndIf
 next
+EndIf;Output or other windows check
 EndIf;Speak if the text was different
 $OldText[$i-1]=$text;Set the old text to the new
 next
