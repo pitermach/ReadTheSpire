@@ -7,5 +7,8 @@ You can find the latest release with all required files on the releases tab. If 
 
 ## Usage
 
-First, download TextTheSpire from the link above, following its readme to setup everything. Then, either before or after you launch the game, start ReadTheSpire. And that's it! It will monitor most of the more important windows and automatically read any changed lines. Sometimes, this may not give you all of the information, but because there are commands to direct just about every window to output, you should be able to fill in anything missing without too many keystrokes. When you're done playing the game, pressing CTRL+Q will quit ReadTheSpire.
+First, download TextTheSpire from the link above, following its readme to setup everything. Then, either before or after you launch the game, start ReadTheSpire. And that's it! It will monitor most of the more important windows and automatically read any changed lines. Sometimes, this may not give you all of the information, but because there are commands to direct just about every window to output, you should be able to fill in anything missing without too many keystrokes. 
 
+When you're done playing the game, pressing CTRL+Q will quit ReadTheSpire.
+
+You can also customise which windows get monitored by editing watchlist.txt. The file format is one window title per line. By default, ReadTheSpire monitors the Output, Choices, player, monster and relic windows. You can add or remove them simply by changing this file.
