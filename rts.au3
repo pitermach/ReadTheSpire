@@ -6,6 +6,7 @@ Msgbox(16, "Error", "Couldn't read Watchlist. The file may either be empty, inac
 exit
 EndIf
 dim $OldText[UBound($WindowList)]
+Dim $buffers[UBound($WindowList)]
 Tolk_Load()
 if not Tolk_IsLoaded() then
 Msgbox(16, "Error", "Tolk failed to load!")
@@ -25,6 +26,7 @@ while 1
 for $i=0 to UBound($WindowList)-1 step 1
 $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
 If $text <> $OldText[$i] then; speak the new text!
+$buffers[$i]=StringSplit($text, @crlf, 3)
 Speak($WindowList[$i]);announce what window the output came from
 If $WindowList[$i]="Output" then ;The entire output Window should always be reread since that's generally requested by the player
 Tolk_Output($text)
