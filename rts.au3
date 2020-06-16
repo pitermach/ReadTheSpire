@@ -1,4 +1,5 @@
 #include "tolk.au3"
+#include "buffers.au3"
 $WindowList=FileReadToArray("watchlist.txt")
 If @error then
 Msgbox(16, "Error", "Couldn't read Watchlist. The file may either be empty, inaccessible or not exist.")
@@ -10,6 +11,7 @@ if not Tolk_IsLoaded() then
 Msgbox(16, "Error", "Tolk failed to load!")
 exit
 EndIf
+Tolk_TrySapi(true)
 func speak($text)
 If $text>"" then tolk_output($text);Suppress blank lines because NVDA gets chatty
 endFunc
@@ -18,6 +20,7 @@ Speak("Exitting")
 exit
 EndFunc
 HotKeySet("^q", "Quit")
+speak("Read The Spire ready!")
 while 1
 for $i=0 to UBound($WindowList)-1 step 1
 $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
