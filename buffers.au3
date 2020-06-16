@@ -55,5 +55,7 @@ EndFunc
 
 HotkeySet("!{down}", "BufferNavigate")
 HotkeySet("!{up}", "BufferNavigate")
+HotkeySet("!{home}", "BufferNavigate")
+HotkeySet("!{end}", "BufferNavigate")
 HotKeySet("!{right}", "BufferSwitch")
 HotKeySet("!{left}", "BufferSwitch")
