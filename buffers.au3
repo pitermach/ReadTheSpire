@@ -51,11 +51,41 @@ EndIf
 EndSelect
 Speak($WindowList[$WhichBuffer])
 EndFunc
-
-
+Func RegisterBufferKeys($OnOrOff)
+If $OnOrOff=1 then
 HotkeySet("!{down}", "BufferNavigate")
 HotkeySet("!{up}", "BufferNavigate")
 HotkeySet("!{home}", "BufferNavigate")
 HotkeySet("!{end}", "BufferNavigate")
 HotKeySet("!{right}", "BufferSwitch")
 HotKeySet("!{left}", "BufferSwitch")
+return
+else
+HotkeySet("!{down}", "")
+HotkeySet("!{up}", "")
+HotkeySet("!{home}", "")
+HotkeySet("!{end}", "")
+HotKeySet("!{right}", "")
+HotKeySet("!{left}", "")
+EndIf
+EndFunc
+
+
+Func SetBufferKeys()
+For $i=0 to uBound($WindowList)-1 step 1
+If WinActive($WindowList[$i]) and $BufferKeysActive=0 then
+RegisterBufferKeys(1)
+$BufferKeysActive=1
+return
+EndIf
+next
+If WinActive("Prompt") and $BufferKeysActive=0 then
+RegisterBufferKeys(1)
+$BufferKeysActive=1
+return
+EndIf
+If $BufferKeysActive=1 then ;Otherwise unregister the keys since some other window is focused.
+RegisterBufferKeys(0)
+$BufferKeysActive=0
+EndIf
+EndFunc
