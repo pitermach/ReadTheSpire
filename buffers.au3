@@ -51,6 +51,11 @@ EndIf
 EndSelect
 Speak($WindowList[$WhichBuffer])
 EndFunc
+Func BufferCopy()
+If ClipPut(($Buffers[$WhichBuffer])[$BufferCursor]) then
+Speak("Copied " & (($Buffers[$WhichBuffer])[$BufferCursor]))
+EndIf
+EndFunc
 Func RegisterBufferKeys($OnOrOff)
 If $OnOrOff=1 then
 HotkeySet("!{down}", "BufferNavigate")
@@ -59,33 +64,29 @@ HotkeySet("!{home}", "BufferNavigate")
 HotkeySet("!{end}", "BufferNavigate")
 HotKeySet("!{right}", "BufferSwitch")
 HotKeySet("!{left}", "BufferSwitch")
+HotKeySet("!c", "BufferCopy")
 return
 else
-HotkeySet("!{down}", "")
-HotkeySet("!{up}", "")
-HotkeySet("!{home}", "")
-HotkeySet("!{end}", "")
-HotKeySet("!{right}", "")
-HotKeySet("!{left}", "")
+HotkeySet("!{down}")
+HotkeySet("!{up}")
+HotkeySet("!{home}")
+HotkeySet("!{end}")
+HotKeySet("!{right}")
+HotKeySet("!{left}")
+HotKeySet("!c")
 EndIf
 EndFunc
 
-
-Func SetBufferKeys()
-For $i=0 to uBound($WindowList)-1 step 1
-If WinActive($WindowList[$i]) and $BufferKeysActive=0 then
-RegisterBufferKeys(1)
-$BufferKeysActive=1
-return
+func IsInGame()
+For $i=0 to UBound($WindowList)-1 step 1
+If WinActive($WindowList[$i]) then
+Return true
+ExitLoop
 EndIf
 next
-If WinActive("Prompt") and $BufferKeysActive=0 then
-RegisterBufferKeys(1)
-$BufferKeysActive=1
-return
-EndIf
-If $BufferKeysActive=1 then ;Otherwise unregister the keys since some other window is focused.
-RegisterBufferKeys(0)
-$BufferKeysActive=0
+If WinActive("Prompt") then
+return true
+else
+return false
 EndIf
 EndFunc

@@ -23,6 +23,14 @@ EndFunc
 HotKeySet("^q", "Quit")
 speak("Read The Spire ready!")
 while 1
+If $BufferKeysActive=0 and IsInGame() then
+$BufferKeysActive=1
+RegisterBufferKeys(1)
+ElseIf not IsInGame() and $BufferKeysActive=1 then
+$BufferKeysActive=0
+RegisterBufferKeys(0)
+EndIf
+
 for $i=0 to UBound($WindowList)-1 step 1
 $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
 If $text <> $OldText[$i] then; speak the new text!
