@@ -7,8 +7,22 @@ You can find the latest release with all required files on the releases tab. If 
 
 ## Usage
 
-First, download TextTheSpire from the link above, following its readme to setup everything. Then, either before or after you launch the game, start ReadTheSpire. And that's it! It will monitor most of the more important windows and automatically read any changed lines. Sometimes, this may not give you all of the information, but because there are commands to direct just about every window to output, you should be able to fill in anything missing without too many keystrokes. 
+First, download TextTheSpire from the link above, following its readme to setup everything.
 
-When you're done playing the game, pressing CTRL+Q will quit ReadTheSpire.
+Then, instead of running the MTS-Launcher, start ReadTheSpire. It will look for MTS-Launcher in the most common installation directories for the Steam version of the game for MTS-Launcher.jar and start it for you. If it can't be found, you will be asked to select the folder where you installed the game. This directory will be remembered so you should have to do this only once. You can also run ReadTheSpire after the game is loaded, in which case starting MTS-Launcher will be skipped.
+
+ReadTheSpire will monitor all Windows for changes, and speak the lines that changed using either your screen reader or SAPI if a supported one is not running. In the case of the output window, ReadTheSpire will always read the entire window after it changes.
+
+You can also review all of the windows without having to switch to them. The review keys below will work in the Prompt as well as all other TextTheSpire windows.
+
+- Alt+Down - next line
+- Alt+Up previous line
+- Alt+Home - first line
+- Alt+End - last line
+- Alt+C - copy current line to clipboard
+- Alt+Right - next window
+- Alt+Left - previous window
+
+When you're done playing the game, ReadTheSpire will close automatically. If you want to quit it sooner, you can do so by pressing CTRL+Q.
 
 You can also customise which windows get monitored by editing watchlist.txt. The file format is one window title per line. By default, ReadTheSpire monitors the Output, Choices, player, monster and relic windows. You can add or remove them simply by changing this file.
