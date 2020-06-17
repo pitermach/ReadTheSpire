@@ -25,7 +25,7 @@ $MTSDir=FileRead("MTSDir.txt")
 If @error then ;Look for the file in the most common directories
 $Dirs=StringSplit("C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\|D:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\", "|", 2)
 For $i=0 to UBound($dirs)-1 step 1
-;Msgbox(0, "checking", $Dirs[$i])
+;Msgbox(0, "checking", $Dirs[$i3])
 If FileExists($dirs[$i] & "mts-launcher.jar") then
 $MTSDir=$Dirs[$i]
 ;msgBox(64, "Success", $Dirs[$i])
@@ -38,9 +38,13 @@ FileWrite("MTSDir.txt", $MTSDir)
 EndIf;Looks for MTS-launcher.jar
 FileChangeDir($MTSDir)
 ShellExecute("mts-launcher.jar")
-speak("Read The Spire ready!")
-
-while 1
+speak("MTS Launcher started, waiting for game to start")
+do
+sleep(250)
+until WinExists("Slay the Spire")
+;Get the Handle of the STS Window to make the script faster
+$STSHandle=WinGetHandle("Slay the Spire")
+while WinExists($STSHandle)=1
 If $BufferKeysActive=0 and IsInGame() then
 $BufferKeysActive=1
 RegisterBufferKeys(1)
