@@ -44,6 +44,8 @@ exit
 EndIf
 EndIf;Looks for MTS-launcher.jar
 FileWrite("MTSDir.txt", $MTSDir)
+EndIf
+
 If $MTSDir <>"none" then
 FileChangeDir($MTSDir)
 If FileExists("moddespire.jar") then
@@ -55,8 +57,6 @@ speak("MTS Launcher started, waiting for game to start")
 else
 speak("ReadTheSpire ready, waiting for you to start the game.")
 EndIf
-EndIf
-
 
 do
 sleep(250)
