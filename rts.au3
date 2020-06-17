@@ -1,5 +1,7 @@
 #include "tolk.au3"
 #include "buffers.au3"
+#include <misc.au3>
+_Singleton("ReadTheSpire");exit if there's more than 1 copy running
 $WindowList=FileReadToArray("watchlist.txt")
 If @error then
 Msgbox(16, "Error", "Couldn't read Watchlist. The file may either be empty, inaccessible or not exist.")
