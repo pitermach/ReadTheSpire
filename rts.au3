@@ -23,10 +23,10 @@ EndFunc
 HotKeySet("^q", "Quit")
 If WinExists("Slay the Spire")=0 then;Launch the MTS launcher
 $MTSDir=FileRead("MTSDir.txt")
-If @error then ;Look for the file in the most common directories
+If $MTSDir="" then ;Look for the file in the most common directories
 $Dirs=StringSplit("C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\|D:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\", "|", 2)
 For $i=0 to UBound($dirs)-1 step 1
-;Msgbox(0, "checking", $Dirs[$i3])
+;Msgbox(0, "checking", $Dirs[$i])
 If FileExists($dirs[$i] & "mts-launcher.jar") then
 $MTSDir=$Dirs[$i]
 ;msgBox(64, "Success", $Dirs[$i])
@@ -34,12 +34,30 @@ ExitLoop
 EndIf
 Next
 If $MTSDir="" then $MTSDir=FileSelectFolder("Browse to Slay the Spire installation folder", "")
-If @error then exit
-FileWrite("MTSDir.txt", $MTSDir)
+If @error then
+$NoLaunch=Msgbox(32+4, "Question", "Would you like to make ReadTheSpire not start MTS-launcher at startup?")
+If $NoLaunch=6 then ;yes
+$MTSDir="none"
+MsgBox(64, "Done", "If you later want to specify the location of MTS-launcher, delete MTSDir.txt located in the ReadTheSpire folder.")
+else ;no
+exit
+EndIf
 EndIf;Looks for MTS-launcher.jar
+FileWrite("MTSDir.txt", $MTSDir)
+If $MTSDir <>"none" then
 FileChangeDir($MTSDir)
+If FileExists("moddespire.jar") then
+ShellExecute("moddespire.jar");For Gog version
+else
 ShellExecute("mts-launcher.jar")
+EndIf
 speak("MTS Launcher started, waiting for game to start")
+else
+speak("ReadTheSpire ready, waiting for you to start the game.")
+EndIf
+EndIf
+
+
 do
 sleep(250)
 until WinExists("Slay the Spire")
