@@ -9,6 +9,8 @@ select
 case @HotkeyPressed="!{up}"
 If $BufferCursor>0 then
 $BufferCursor=$BufferCursor-1
+ElseIf $bufferCursor>UBound($Buffers[$WhichBuffer])-1 then ;Going up in a shrunken buffer while the cursor is out of bounds.
+$BufferCursor=UBound($Buffers[$WhichBuffer])-1
 else
 _WinAPI_MessageBeep(0)
 EndIf
