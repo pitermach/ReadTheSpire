@@ -21,7 +21,25 @@ Speak("Exitting")
 exit
 EndFunc
 HotKeySet("^q", "Quit")
+$MTSDir=FileRead("MTSDir.txt")
+If @error then ;Look for the file in the most common directories
+$Dirs=StringSplit("C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\|D:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\", "|", 2)
+For $i=0 to UBound($dirs)-1 step 1
+;Msgbox(0, "checking", $Dirs[$i])
+If FileExists($dirs[$i] & "mts-launcher.jar") then
+$MTSDir=$Dirs[$i]
+;msgBox(64, "Success", $Dirs[$i])
+ExitLoop
+EndIf
+Next
+If $MTSDir="" then $MTSDir=FileSelectFolder("Browse to Slay the Spire installation folder", "")
+If @error then exit
+FileWrite("MTSDir.txt", $MTSDir)
+EndIf;Looks for MTS-launcher.jar
+FileChangeDir($MTSDir)
+ShellExecute("mts-launcher.jar")
 speak("Read The Spire ready!")
+
 while 1
 If $BufferKeysActive=0 and IsInGame() then
 $BufferKeysActive=1
