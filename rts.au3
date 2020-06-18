@@ -113,6 +113,7 @@ If @error then
 MsgBox(16, "Regexp Error", "error in expression " & $Substitutions[$i3])
 exit
 EndIf
+;If @extended>0 then MsgBox(0, "matched", "replaced " & $Substitutions[$i3][0] & " with " & $Substitutions[$i3][1] & " text is now " & $TextToSpeak)
 next
 $SpokeWindowName=0
 
@@ -121,7 +122,7 @@ Tolk_Output($textToSpeak)
 
 else ;For other windows, compare the old and newly changed text line by line to only anounce the ones that changed.
 $OldArray=StringSplit($OldText[$i], @crlf, 1)
-$NewArray=StringSplit($textToSpeak, @crlf, 1)
+$NewArray=StringSplit($TextToSpeak, @crlf, 1)
 For $i2=1 to $NewArray[0] step 1
 If $i2<uBound($OldArray) then;line numbers that exist in both strings
 If $OldArray[$i2]<>$NewArray[$i2] then 
