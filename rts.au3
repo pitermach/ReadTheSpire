@@ -3,10 +3,19 @@
 #include <misc.au3>
 _Singleton("ReadTheSpire");exit if there's more than 1 copy running
 $WindowList=FileReadToArray("watchlist.txt")
+
 If @error then
 Msgbox(16, "Error", "Couldn't read Watchlist. The file may either be empty, inaccessible or not exist.")
 exit
 EndIf
+dim $SilentWindowList[UBound($WindowList)]
+For $i=0 to UBound($WindowList)-1 step 1
+If StringLeft($WindowList[$i], 1)="*" then;Silent window
+$SilentWindowList[$i]=true
+$WindowList[$i]=StringTrimLeft($WindowList[$i], 1)
+EndIf
+next
+
 dim $OldText[UBound($WindowList)]
 Dim $buffers[UBound($WindowList)]
 Tolk_Load()
@@ -77,7 +86,8 @@ EndIf
 for $i=0 to UBound($WindowList)-1 step 1
 $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
 If $text <> $OldText[$i] then; speak the new text!
-$buffers[$i]=StringSplit($text, @crlf, 3)
+$buffers[$i]=StringSplit($text, @crlf, 3);update the buffers
+If $SilentWindowList[$i]=false then
 Speak($WindowList[$i]);announce what window the output came from
 If $WindowList[$i]="Output" then ;The entire output Window should always be reread since that's generally requested by the player
 Tolk_Output($text)
@@ -94,6 +104,7 @@ EndIf
 next
 EndIf;Output or other windows check
 EndIf;Speak if the text was different
+EndIf ;Silent window or not check
 $OldText[$i]=$text;Set the old text to the new
 next
 
