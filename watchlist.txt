@@ -3,3 +3,5 @@ Choices
 Player
 Monster
 Relic
+*Hand
+*Map
