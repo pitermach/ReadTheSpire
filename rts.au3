@@ -1,6 +1,7 @@
 #include "tolk.au3"
 #include "buffers.au3"
 #include <misc.au3>
+#include <array.au3>
 _Singleton("ReadTheSpire");exit if there's more than 1 copy running
 $WindowList=FileReadToArray("watchlist.txt")
 
@@ -15,6 +16,21 @@ $SilentWindowList[$i]=true
 $WindowList[$i]=StringTrimLeft($WindowList[$i], 1)
 EndIf
 next
+$SubstitutionList=FileReadToArray("substitutions.txt")
+
+If @error then
+Msgbox(16, "Error", "Couldn't read substitutions. The file may either be empty, inaccessible or not exist.")
+exit
+EndIf
+Dim $Substitutions[UBound($SubstitutionList)][2]
+
+For $i=0 to UBound($SubstitutionList)-1 step 1
+$TempArray=StringSplit($SubstitutionList[$i], "=", 2)
+If not @error then
+$Substitutions[$i][0]=$TempArray[0]
+$Substitutions[$i][1]=$TempArray[1]
+EndIf
+Next
 
 dim $OldText[UBound($WindowList)]
 Dim $buffers[UBound($WindowList)]
