@@ -1,7 +1,9 @@
+
 #include "tolk.au3"
 #include "buffers.au3"
 #include <misc.au3>
 #include <array.au3>
+AutoItSetOption("WinTextMatchMode", -1)
 _Singleton("ReadTheSpire");exit if there's more than 1 copy running
 $WindowList=FileReadToArray("watchlist.txt")
 
@@ -140,7 +142,7 @@ EndIf
 next
 EndIf;Output or other windows check
 EndIf;Speak if the text was different
-EndIf ;Silent window or not check
+EndIf ;Silent window or not checks
 $OldText[$i]=$text;Set the old text to the new
 next
 
