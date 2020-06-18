@@ -51,6 +51,16 @@ else ;First Buffer, so wrap around to the last
 $WhichBuffer=UBound($WindowList)-1
 EndIf
 EndSelect
+;Now do Alt+Numbers
+For $i=1 to 9 step 1
+If @HotkeyPressed="!"&$i then
+If $i<=UBound($buffers) then
+$WhichBuffer=$i-1
+else;No buffer with that number
+_WinAPI_MessageBeep(0)
+EndIf
+EndIf
+next
 Speak($WindowList[$WhichBuffer])
 EndFunc
 Func BufferCopy()
@@ -66,6 +76,9 @@ HotkeySet("!{home}", "BufferNavigate")
 HotkeySet("!{end}", "BufferNavigate")
 HotKeySet("!{right}", "BufferSwitch")
 HotKeySet("!{left}", "BufferSwitch")
+For $i=1 to 9 step 1
+HotKeySet("!"&$i, "BufferSwitch")
+next
 HotKeySet("!c", "BufferCopy")
 return
 else
@@ -75,6 +88,10 @@ HotkeySet("!{home}")
 HotkeySet("!{end}")
 HotKeySet("!{right}")
 HotKeySet("!{left}")
+For $i=1 to 9 step 1
+HotKeySet("!"&$i)
+next
+
 HotKeySet("!c")
 EndIf
 EndFunc
