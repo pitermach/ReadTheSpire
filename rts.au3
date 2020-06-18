@@ -104,27 +104,37 @@ $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
 If $text <> $OldText[$i] then; speak the new text!
 $buffers[$i]=StringSplit($text, @crlf, 3);update the buffers
 If $SilentWindowList[$i]=false then
+$TextToSpeak=""
 For $i3=0 to UBound($Substitutions)-1 step 1
-$Text=StringRegExpReplace($Text, $Substitutions[$i3][0], $Substitutions[$i3][1])
+$TextToSpeak=StringRegExpReplace($Text, $Substitutions[$i3][0], $Substitutions[$i3][1])
 If @error then
 MsgBox(16, "Regexp Error", "error in expression " & $Substitutions[$i3])
 exit
 EndIf
 next
-
+$SpokeWindowName=0
 
 If $WindowList[$i]="Output" then ;The entire output Window should always be reread since that's generally requested by the player
-Tolk_Output($text)
+Tolk_Output($textToSpeak)
 
 else ;For other windows, compare the old and newly changed text line by line to only anounce the ones that changed.
 $OldArray=StringSplit($OldText[$i], @crlf, 1)
-$NewArray=StringSplit($text, @crlf, 1)
+$NewArray=StringSplit($textToSpeak, @crlf, 1)
 For $i2=1 to $NewArray[0] step 1
 If $i2<uBound($OldArray) then;line numbers that exist in both strings
 If $OldArray[$i2]<>$NewArray[$i2] then 
+If $SpokeWindowName=0 then
+$NewArray[$i2]=$WindowList[$i] & ": " & $NewArray[$i2]
+$SpokeWindowName=1
+EndIf
 Speak($NewArray[$i2]);Only speak the line if it changed
 endIf ;If $OldArray[$i2]<>$NewArray[$i2]
 else;The new text has more lines than the old, so just speak all of them
+If $SpokeWindowName=0 then
+$NewArray[$i2]=$WindowList[$i] & ": " & $NewArray[$i2]
+$SpokeWindowName=1
+EndIf
+
 Speak($NewArray[$i2])
 EndIf
 next
