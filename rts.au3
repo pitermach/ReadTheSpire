@@ -1,3 +1,7 @@
+#pragma compile(CompanyName, 'Piotr Machacz')
+#pragma compile (FileDescription, ReadTheSpire)
+#pragma compile(ProductName, ReadTheSpire)
+#Pragma compile (ProductVersion, 3.0)
 
 #include "tolk.au3"
 #include "buffers.au3"
