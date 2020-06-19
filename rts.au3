@@ -106,9 +106,9 @@ $text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
 If $text <> $OldText[$i] then; speak the new text!
 $buffers[$i]=StringSplit($text, @crlf, 3);update the buffers
 If $SilentWindowList[$i]=false then
-$TextToSpeak=""
+$TextToSpeak=$Text;The RegExp substitutions will happen on this variable instead of the original text as to not break the comparisons.
 For $i3=0 to UBound($Substitutions)-1 step 1
-$TextToSpeak=StringRegExpReplace($Text, $Substitutions[$i3][0], $Substitutions[$i3][1])
+$TextToSpeak=StringRegExpReplace($TextToSpeak, $Substitutions[$i3][0], $Substitutions[$i3][1])
 If @error then
 MsgBox(16, "Regexp Error", "error in expression " & $Substitutions[$i3])
 exit
