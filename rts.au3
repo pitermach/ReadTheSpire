@@ -43,7 +43,8 @@ exit
 EndIf
 Tolk_TrySapi(true)
 func speak($text)
-If $text>"" then tolk_output($text);Suppress blank lines because NVDA gets chatty
+If Not StringIsSpace($text) then tolk_output($text);Suppress blank lines because NVDA gets chatty
+;_ArrayDisplay(StringToASCIIArray($text))
 endFunc
 func Quit()
 Speak("Exitting")
@@ -118,7 +119,7 @@ next
 $SpokeWindowName=0
 
 If $WindowList[$i]="Output" then ;The entire output Window should always be reread since that's generally requested by the player
-Tolk_Output($textToSpeak)
+Speak($textToSpeak)
 
 else ;For other windows, compare the old and newly changed text line by line to only anounce the ones that changed.
 $OldArray=StringSplit($OldText[$i], @crlf, 1)
