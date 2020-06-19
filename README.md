@@ -23,9 +23,10 @@ You can also review all of the windows without having to switch to them. The rev
 - Alt+Right - next window
 - Alt+Left - previous window
 - Alt+1-9 - switch to the window with that number
+
 When you're done playing the game, ReadTheSpire will close automatically. If you want to quit it sooner, you can do so by pressing CTRL+Q.
 
 You can also customise which windows get monitored by editing watchlist.txt. The file format is one window title per line. By default, ReadTheSpire monitors the Output, Choices, player, monster and relic windows. You can add or remove them simply by changing this file. You can also add a window to appear as a buffer accessible with the review keys, but not spoken automatically, by putting an asterisk (*) before the window name. The hand and map windows are configured like this by default.
 
 Finally, you can also add text substitutions to change how certain text is spoken or silence it all together. By default, a substitution is included to silence the debug intents for monsters and clean up things like relic and potion displays that don't include a space after the number. 
-To do this, edit substitutions.txt. The format for this file is <pattern>=replacement, where pattern and replacement are regular expressions.
+To do this, edit substitutions.txt. The format for this file is pattern=replacement, where pattern and replacement are regular expressions.
