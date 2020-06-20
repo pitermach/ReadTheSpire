@@ -82,8 +82,8 @@ EndIf
 
 If $MTSDir <>"none" then
 FileChangeDir($MTSDir)
-If FileExists("moddespire.jar") then
-ShellExecute("moddespire.jar");For Gog version
+If FileExists("modthespire.jar") then
+ShellExecute("modthespire.jar");For Gog version
 else
 ShellExecute("mts-launcher.jar")
 EndIf
@@ -109,12 +109,12 @@ EndIf
 for $i=0 to UBound($WindowList)-1 step 1
 If $HandleList[$i]=0 then
 $HandleList[$i]=WinGetHandle($WindowList[$i])
-If not @error then speak($WindowList[$i] & " opened.")
+;If not @error then speak($WindowList[$i] & " opened.")
 EndIf
 If $HandleList[$i] <>0 then
 $text=ControlGetText($HandleList[$i], "", "[CLASS:Edit]")
 If @error then
-speak($WindowList[$i] & " closed.")
+;speak($WindowList[$i] & " closed.")
 $HandleList[$i]=0
 else
 If $text <> $OldText[$i] then; speak the new text!
