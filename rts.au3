@@ -10,7 +10,7 @@
 AutoItSetOption("WinTextMatchMode", -1)
 _Singleton("ReadTheSpire");exit if there's more than 1 copy running
 $WindowList=FileReadToArray("watchlist.txt")
-
+Dim $HandleList[UBound($WindowList)][2]
 If @error then
 Msgbox(16, "Error", "Couldn't read Watchlist. The file may either be empty, inaccessible or not exist.")
 exit
@@ -82,8 +82,8 @@ EndIf
 
 If $MTSDir <>"none" then
 FileChangeDir($MTSDir)
-If FileExists("moddespire.jar") then
-ShellExecute("moddespire.jar");For Gog version
+If FileExists("modthespire.jar") then
+ShellExecute("modthespire.jar");For Gog version
 else
 ShellExecute("mts-launcher.jar")
 EndIf
@@ -107,7 +107,18 @@ RegisterBufferKeys(0)
 EndIf
 
 for $i=0 to UBound($WindowList)-1 step 1
-$text=ControlGetText($WindowList[$i], "", "[CLASS:Edit]")
+If $HandleList[$i][0]=0 then
+$HandleList[$i][0]=WinGetHandle($WindowList[$i])
+;If not @error then speak($WindowList[$i] & " opened.")
+EndIf
+If $HandleList[$i][0] <>0 then
+If $HandleList[$i][1]=0 then $HandleList[$i][1]=ControlGetHandle($HandleList[$i][0], "", "[CLASS:Edit]")
+    $text=ControlGetText($HandleList[$i][0], "", $HandleList[$i][1])
+If @error then
+;speak($WindowList[$i] & " closed.")
+$HandleList[$i][0]=0
+$HandleList[$i][1]=0
+else
 If $text <> $OldText[$i] then; speak the new text!
 $buffers[$i]=StringSplit($text, @crlf, 3);update the buffers
 If $SilentWindowList[$i]=false then
@@ -150,7 +161,10 @@ EndIf;Output or other windows check
 EndIf;Speak if the text was different
 EndIf ;Silent window or not checks
 $OldText[$i]=$text;Set the old text to the new
+EndIf
+EndIf
+
 next
 
-sleep(10)
+sleep(50)
 Wend
