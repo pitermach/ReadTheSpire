@@ -98,7 +98,7 @@ EndFunc
 
 func IsInGame()
 For $i=0 to UBound($WindowList)-1 step 1
-If WinActive($WindowList[$i]) then
+If WinGetHandle("[ACTIVE]")=$HandleList[$i][0] then
 Return true
 ExitLoop
 EndIf

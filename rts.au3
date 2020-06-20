@@ -166,5 +166,5 @@ EndIf
 
 next
 
-sleep(50)
+sleep(30)
 Wend
