@@ -10,7 +10,7 @@
 AutoItSetOption("WinTextMatchMode", -1)
 _Singleton("ReadTheSpire");exit if there's more than 1 copy running
 $WindowList=FileReadToArray("watchlist.txt")
-Dim $HandleList[UBound($WindowList)]
+Dim $HandleList[UBound($WindowList)][2]
 If @error then
 Msgbox(16, "Error", "Couldn't read Watchlist. The file may either be empty, inaccessible or not exist.")
 exit
@@ -107,15 +107,17 @@ RegisterBufferKeys(0)
 EndIf
 
 for $i=0 to UBound($WindowList)-1 step 1
-If $HandleList[$i]=0 then
-$HandleList[$i]=WinGetHandle($WindowList[$i])
+If $HandleList[$i][0]=0 then
+$HandleList[$i][0]=WinGetHandle($WindowList[$i])
 ;If not @error then speak($WindowList[$i] & " opened.")
 EndIf
-If $HandleList[$i] <>0 then
-$text=ControlGetText($HandleList[$i], "", "[CLASS:Edit]")
+If $HandleList[$i][0] <>0 then
+If $HandleList[$i][1]=0 then $HandleList[$i][1]=ControlGetHandle($HandleList[$i][0], "", "[CLASS:Edit]")
+    $text=ControlGetText($HandleList[$i][0], "", $HandleList[$i][1])
 If @error then
 ;speak($WindowList[$i] & " closed.")
-$HandleList[$i]=0
+$HandleList[$i][0]=0
+$HandleList[$i][1]=0
 else
 If $text <> $OldText[$i] then; speak the new text!
 $buffers[$i]=StringSplit($text, @crlf, 3);update the buffers
@@ -164,5 +166,5 @@ EndIf
 
 next
 
-sleep(30)
+sleep(50)
 Wend

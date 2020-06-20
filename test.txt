@@ -1,0 +1,10 @@
+Monster
+Count: 2
+0: Spike Slime (S)
+Block: 0
+HP: 12/12
+Intent: Debug (Shouldn't Happen)
+1: Acid Slime (M)
+Block: 0
+HP: 30/30
+Intent: Debug (Shouldn't Happen)
