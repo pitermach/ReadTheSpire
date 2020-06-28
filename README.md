@@ -1,6 +1,6 @@
 # ReadTheSpire
 
-ReadTheSpire is a little program I threw together in an hour that automatically reads changed text from [TextTheSpire](https://github.com/Wensber/TextTheSpire) which is a mod making the SlayTheSpire game playable by blind people using screen readers. It does so by displaying a number of windows all displaying different pieces of information. I found having to Alt+Tab between them to figure out what's going on tedious, which is why this program exists.
+ReadTheSpire is a little program I threw together in an hour, then evolved over the next 2 weeks to add extra features, that automatically reads changed text from [TextTheSpire](https://github.com/Wensber/TextTheSpire) which is a mod making the SlayTheSpire game playable by blind people using screen readers. It does so by displaying a number of windows all displaying different pieces of information. I found having to Alt+Tab between them to figure out what's going on tedious, which is why this program exists.
 ## Downloading
 
 You can find the latest release with all required files on the releases tab. If you want to run from source, you will have to supply the DLL for Tolk as well as the DLL's for the screen readers it supports.
@@ -28,4 +28,4 @@ When you're done playing the game, ReadTheSpire will close automatically. If you
 You can also customise which windows get monitored by editing watchlist.txt. The file format is one window title per line. By default, ReadTheSpire monitors the Output, Choices, player, monster and relic windows. You can add or remove them simply by changing this file. You can also add a window to appear as a buffer accessible with the review keys, but not spoken automatically, by putting an asterisk (*) before the window name. The hand and map windows are configured like this by default.
 
 Finally, you can also add text substitutions to change how certain text is spoken or silence it all together. By default, a substitution is included to silence the debug intents for monsters and clean up things like relic and potion displays that don't include a space after the number. 
-To do this, edit substitutions.txt. The format for this file is <pattern>=replacement, where pattern and replacement are regular expressions.
+To do this, edit substitutions.txt. The format for this file is pattern=replacement, where pattern and replacement are regular expressions.
