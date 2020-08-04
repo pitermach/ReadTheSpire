@@ -1,7 +1,7 @@
 #pragma compile(CompanyName, 'Piotr Machacz')
 #pragma compile (FileDescription, ReadTheSpire)
 #pragma compile(ProductName, ReadTheSpire)
-#Pragma compile (ProductVersion, 3.0)
+#Pragma compile (ProductVersion, 3.22)
 
 #include "tolk.au3"
 #include "buffers.au3"
@@ -87,6 +87,11 @@ ShellExecute("modthespire.jar");For Gog version
 else
 ShellExecute("mts-launcher.jar")
 EndIf
+If @error then
+    msgbox(16, "Error", "MTSLauncher was found but didn't start correctly. Please make sure you have Java installed and that it's set to open .jar files.")
+    Exit
+EndIf
+
 speak("MTS Launcher started, waiting for game to start")
 else
 speak("ReadTheSpire ready, waiting for you to start the game.")

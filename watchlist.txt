@@ -2,6 +2,7 @@ Output
 Choices
 Player
 Monster
-Relic
+*Relic
 *Hand
 *Map
+Event
