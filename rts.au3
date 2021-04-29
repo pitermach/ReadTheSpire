@@ -55,7 +55,7 @@ Speak("Exitting")
 exit
 EndFunc
 HotKeySet("^q", "Quit")
-If WinExists("Slay the Spire")=0 then;Launch the MTS launcher
+If WinExists("Modded Slay the Spire")=0 then;Launch the MTS launcher
 $MTSDir=FileRead("MTSDir.txt")
 If $MTSDir="" then ;Look for the file in the most common directories
 $Dirs=StringSplit("C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\|D:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\", "|", 2)
@@ -99,9 +99,9 @@ EndIf
 
 do
 sleep(250)
-until WinExists("Slay the Spire")
+until WinExists("Modded Slay the Spire")
 EndIf;Look if the game is open, otherwise launch it.
-$STSHandle=WinGetHandle("Slay the Spire")
+$STSHandle=WinGetHandle("Modded Slay the Spire")
 while WinExists($STSHandle)=1
 If $BufferKeysActive=0 and IsInGame() then
 $BufferKeysActive=1

@@ -103,6 +103,9 @@ Return true
 ExitLoop
 EndIf
 next
+If WinGetHandle("[ACTIVE]")=$STSHandle then
+    return true
+    EndIf
 If WinActive("Prompt") then
 return true
 else
